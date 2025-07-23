@@ -162,10 +162,10 @@ root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 ENCODERS = {
     "tiny_0230s": partial(
         build_tiny_0230s,
-        ckpt=os.path.join(root, "/home/lyy/user/FG-ViM/model/pretrain/vssm1_tiny_0230s_ckpt_epoch_264.pth"),
+        ckpt=os.path.join(root, "model/pretrain/vssm1_tiny_0230s_ckpt_epoch_264.pth"),
     ),
     "small_0229s": partial(
         build_small_0229s,
-        ckpt=os.path.join(root, "/home/lyy/user/FG-ViM/model/pretrain/vssm1_tiny_0230s_ckpt_epoch_264.pth"),
+        ckpt=os.path.join(root, "model/pretrain/vssm1_tiny_0230s_ckpt_epoch_264.pth"),
     ),
 }
