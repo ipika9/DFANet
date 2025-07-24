@@ -13,7 +13,7 @@ In addition, you need to install the necessary packages using the following inst
 And install a runtime environment that supports Mamba: 
 
 ```
-Python 3.8 / Pytorch 2.0.0 / NVIDIA GeForce RTX 3090 / CUDA 11.8.0 / Ubuntu
+Python 3.8 / Pytorch 2.0.0 / NVIDIA GeForce RTX 4090 / CUDA 11.8.0 / Ubuntu
 pip install -r requirements.txt
 cd ./kernels/selective_scan
 pip install -e .
