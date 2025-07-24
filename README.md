@@ -1,50 +1,20 @@
 <div align="center">
-<h1>MSVM-UNet: Multi-Scale Vision Mamba UNet for Medical Image Segmentation</h1>
-
-[Chaowei Chen](mailto:chishengchen@stu.ynu.edu.cn)<sup>1</sup>,[Li Yu](mailto:yuli0501@163.com)<sup>1</sup>,[Shiquan Min](mailto:minshiquan@mail.ynu.edu.cn)<sup>1</sup>, [Shunfang Wang](mailto:sfwang_66@ynu.edu.cn)<sup>1,2,*</sup>
-
-<div><sup>1</sup>School of Information Science and Engineering, Yunnan University, Kunming, 650504, Yunnan, China</div>
-<div><sup>2</sup>Yunnan Key Laboratory of Intelligent Systems and Computing, Yunnan University, Kunming, 650504, Yunnan, China</div>
-
-Paper: ([arXiv 2408.13735](https://arxiv.org/abs/2408.13735))
-
+<h1>DFA-Net: Dual Frequency-Aware Vision Mamba U-Net for Medical Image Segmentation</h1>
 </div>
 
 ## Abstract
 
-State Space Models (SSMs), especially Mamba, have shown great promise in medical image segmentation due to their ability to model long-range dependencies with linear computational complexity. However, accurate medical image segmentation requires the effective learning of both multi-scale detailed feature representations and global contextual dependencies. Although existing works have attempted to address this issue by integrating CNNs and SSMs to leverage their respective strengths, they have not designed specialized modules to effectively capture multi-scale feature representations, nor have they adequately addressed the directional sensitivity problem when applying Mamba to 2D image data. To overcome these limitations, we propose a Multi-Scale Vision Mamba UNet model for medical image segmentation, termed MSVM-UNet. Specifically, by introducing multi-scale convolutions in the VSS blocks, we can more effectively capture and aggregate multi-scale feature representations from the hierarchical features of the VMamba encoder and better handle 2D visual data. Additionally, the large kernel patch expanding (LKPE) layers achieve more efficient upsampling of feature maps by simultaneously integrating spatial and channel information. Extensive experiments on the Synapse and ACDC datasets demonstrate that our approach is more effective than some state-of-the-art methods in capturing and aggregating multi-scale feature representations and modeling long-range dependencies between pixels.
-
-## Overview
-
-<img src="./assets/overall.png" alt="overall"  />
-
-## Main Results
-
-- Synapse Multi-Organ Segmentation
-
-![image-20240825134505994](./assets/image-20240825134505994.png)
-
-- ACDC for Automated Cardiac Segmentation
-
-![image-20240825134539739](./assets/image-20240825134539739.png)
+Currently, edge blurring and the loss of structural details remain key challenges that limit the performance of medical image segmentation.Although Vision Mamba demonstrates strong long-range dependency modeling capabilities, it still shows limited sensitivity to high-frequency details in the frequency domain, which often results in weakened fine-grained features and inaccurate boundary reconstruction.To address these issues, we propose a Dual Frequency-Aware Vision Mamba Network (DFA-Net), which introduces two frequency-aware modules into the feature fusion and decoding stages, respectively, to preserve detail features and reconstruct boundaries, forming a cross-stage frequency modeling pathway. Specifically, we design an Adaptive Frequency-Aware Interaction (AFAI) module in the fusion stage, which employs a learnable Laplacian kernel to decouple high- and low-frequency components and enhances frequency-domain representation through a dynamic frequency interaction mechanism.In the decoding stage, we incorporate a Frequency Wavelet Vision State Space (FWVSS) block, which leverages wavelet transform to enhance frequency-band detail perception and integrates multi-scale convolutional aggregation to capture local context for fine-grained reconstruction of blurred boundaries.Extensive experiments on two public medical image segmentation datasets (Synapse and ACDC) demonstrate that DFA-Net outperforms previous state-of-the-art methods, achieving up to 1.31\% improvement in average Dice score, and reaching SOTA performance, showcasing its effectiveness in preserving details and accurately reconstructing blurred boundaries.
 
 ## Installation
 
-We recommend the following platforms: 
+We recommend the following platforms
+In addition, you need to install the necessary packages using the following instructions
+And install a runtime environment that supports Mamba: 
 
 ```
 Python 3.8 / Pytorch 2.0.0 / NVIDIA GeForce RTX 3090 / CUDA 11.8.0 / Ubuntu
-```
-
-In addition, you need to install the necessary packages using the following instructions:
-
-```bash
 pip install -r requirements.txt
-```
-
-And install a runtime environment that supports Mamba:
-
-```bash
 cd ./kernels/selective_scan
 pip install -e .
 ```
@@ -53,7 +23,7 @@ pip install -e .
 
 #### Dataset:
 
-- **Synapse Multi-Organ Dataset**: Sign up in the [official Synapse website](https://www.synapse.org/#!Synapse:syn3193805/wiki/89480) and download the dataset or download the [preprocessed data](https://drive.google.com/file/d/1tGqMx-E4QZpSg2HQbVq5W3KSTHSG0hjK/view?usp=share_link) and save in the `dataset/synapse/` folder.
+- **Synapse Multi-Organ Dataset**: Sign up in the [official Synapse website](https://www.synapse.org/#!Synapse:syn3193805/wiki/89480) and download the dataset , save in the `dataset/synapse/` folder.
 - **ACDC Dataset**: Download the preprocessed ACDC dataset from [Google Drive of MT-UNet](https://drive.google.com/file/d/13qYHNIWTIBzwyFgScORL2RFd002vrPF2/view) and move into `dataset/acdc/` folder.
 
 #### ImageNet pretrained model:
@@ -70,18 +40,11 @@ python train_synapse.py
 # ACDC Dataset
 python train_acdc.py
 ```
+## test
 
-## Citation
+Please put the trained checkpoints file into the inference.py file for testing:
 
-```
-@article{chen2024msvmunet,
-  title={MSVM-UNet: Multi-Scale Vision Mamba UNet for Medical Image Segmentation}, 
-  author={Chaowei Chen and Li Yu and Shiquan Min and Shunfang Wang},
-  journal={arXiv preprint arXiv:2408.13735},
-  year={2024}
-}
+```python
+python inference.py
 ```
 
-## Acknowledgements
-
-We thank the authors of [TransUNet](https://github.com/Beckschen/TransUNet), [SLDGroup](https://github.com/SLDGroup), [Mamba](https://github.com/state-spaces/mamba), [VMamba](https://github.com/MzeroMiko/VMamba), [VM-UNet](https://github.com/JCruan519/VM-UNet), and [Swin-UMamba](https://github.com/JiarunLiu/Swin-UMamba) for making their valuable code & data publicly available.
