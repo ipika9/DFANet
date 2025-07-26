@@ -190,7 +190,7 @@ def test_acdc(ckpt: str) -> None:
 
     device = "cuda:0"
     model = get_model(ckpt=ckpt, in_channels=3, num_classes=4).to(device)
-    dataset = ACDCDataset(base_dir="/home/lyy/user/FG-ViM/dataset/acdc/ACDC", split="test")
+    dataset = ACDCDataset(base_dir="dataset/acdc/ACDC", split="test")
     dataloader = DataLoader(dataset, batch_size=1, shuffle=False, num_workers=0)
     inference(
         model=model,
