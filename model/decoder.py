@@ -209,23 +209,23 @@ class WBA(nn.Module):
         self.idwt = EnhancedIDWT(wave_type=wave_type)
 
         self.low_freq_process = nn.Sequential(
-            nn.Conv2d(dim, wave_dim, kernel_size=1),  # 降维
-            nn.Conv2d(wave_dim, wave_dim, kernel_size=3, padding=1, groups=wave_dim),  # 深度卷积
-            nn.Conv2d(wave_dim, wave_dim, kernel_size=1),  # 点卷积
+            nn.Conv2d(dim, wave_dim, kernel_size=1), 
+            nn.Conv2d(wave_dim, wave_dim, kernel_size=3, padding=1, groups=wave_dim),  
+            nn.Conv2d(wave_dim, wave_dim, kernel_size=1), 
             LayerNorm2d(wave_dim),
             nn.GELU()
         )
 
         self.high_freq_process = nn.Sequential(
-            nn.Conv2d(dim, wave_dim, kernel_size=1),  # 降维
-            nn.Conv2d(wave_dim, wave_dim, kernel_size=3, padding=1, groups=wave_dim),  # 深度卷积
+            nn.Conv2d(dim, wave_dim, kernel_size=1), 
+            nn.Conv2d(wave_dim, wave_dim, kernel_size=3, padding=1, groups=wave_dim),  
             LayerNorm2d(wave_dim),
             nn.GELU()
         )
 
         self.band_attention = nn.Sequential(
             nn.AdaptiveAvgPool2d(1),
-            nn.Conv2d(wave_dim * 4, wave_dim * 4, kernel_size=1, groups=4),  # 分组卷积
+            nn.Conv2d(wave_dim * 4, wave_dim * 4, kernel_size=1, groups=4), 
             nn.Sigmoid()
         )
 
@@ -234,7 +234,7 @@ class WBA(nn.Module):
         self.skip = nn.Identity() if dim == dim else nn.Conv2d(dim, dim, kernel_size=1)
 
         self.edge_enhancement = nn.Sequential(
-            nn.Conv2d(dim, dim, kernel_size=3, padding=1, groups=dim),  # 深度卷积
+            nn.Conv2d(dim, dim, kernel_size=3, padding=1, groups=dim), 
             nn.Sigmoid()
         )
 
@@ -370,7 +370,7 @@ class FAPE(nn.Module):
         feat = rearrange(feat, pattern="b h w c -> b c h w")
         return feat
 
-class   FLKPE(nn.Module):
+class OutputExpander (nn.Module):
     def __init__(
         self,
         dim: int,
@@ -378,7 +378,7 @@ class   FLKPE(nn.Module):
         dim_scale: int = 4,
         norm_layer: Type[nn.Module] = nn.LayerNorm
     ):
-        super(FLKPE, self).__init__()
+        super(OutputExpander, self).__init__()
         self.dim = dim
         self.dim_scale = dim_scale
         self.expand = nn.Sequential(
@@ -452,9 +452,9 @@ class Decoder(nn.Module):
                     out_channels=dims[i],
                     depth=depths[i],
                     drop_path=dpr[sum(depths[: i - 1]): sum(depths[: i])],
-                    use_wavelet=True,  # 启用小波重构
+                    use_wavelet=True, 
                 ))
-        self.out_layers = nn.Sequential(FLKPE(dims[-1], num_classes))
+        self.out_layers = nn.Sequential(OutputExpander(dims[-1], num_classes))
 
     def forward(self, features: Sequence[torch.Tensor]) -> torch.Tensor:
         out = features[0]
