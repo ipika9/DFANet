@@ -20,12 +20,8 @@ ACDC_COLORMAP = {
     2: [0, 255, 0],
     3: [255, 0, 0],
 }
-# NEW: Add colormap for ISIC2017
-ISIC_COLORMAP = {
-    1: [255, 0, 0],  # Lesion is red
-}
+
 class2colormap = {
-    22: ISIC_COLORMAP, # NEW: map for 2 classes
     9: SYNAPSE_COLORMAP,
     4: ACDC_COLORMAP
 }
