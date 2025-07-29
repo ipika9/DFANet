@@ -226,5 +226,5 @@ def test_synapse(ckpt: str) -> None:
         norm_x_transform=norm_x_transform,
     )
 if __name__ == '__main__':
-    test_synapse(ckpt="last_epoch=359-val_mean_dice=0.8635.ckpt")
-    # test_acdc(ckpt="log/acdc/checkpoints/epoch=239-val_mean_dice=0.9275.ckpt")
+    test_synapse()
+    # test_acdc()
