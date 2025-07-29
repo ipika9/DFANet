@@ -14,7 +14,5 @@ lightning
 monai
 opencv-python
 einops
-fvcore
-imgaug
 grad-cam
 calflops
