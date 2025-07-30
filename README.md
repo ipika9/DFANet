@@ -24,7 +24,7 @@ pip install -e .
 
 #### ImageNet pretrained model:
 
-You should download the pretrained VMamba-Tiny V2 model (vssm_tiny_0230_ckpt_epoch_262) from [VMamba](https://github.com/MzeroMiko/VMamba/releases/), and then put it in the `model/pretrain/` folder for initialization.
+You should download the pretrained VMamba-Tiny V2 model (vssm1_tiny_0230s_ckpt_epoch_264) from [VMamba](https://github.com/MzeroMiko/VMamba/releases/), and then put it in the `model/pretrain/` folder for initialization.
 
 ## Training
 
