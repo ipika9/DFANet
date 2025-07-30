@@ -59,7 +59,7 @@ class FrequencyInteractionModule(nn.Module):
         )
         self.fusion = nn.Sequential(
             nn.Conv2d(dim * 2, dim, kernel_size=1),
-            nn.LayerNorm([dim, 1, 1])  # 或 LayerNorm(dim)
+            nn.LayerNorm([dim, 1, 1]) 
         )
 
     def forward(self, x: torch.Tensor) -> torch.Tensor:
