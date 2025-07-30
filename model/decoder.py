@@ -225,7 +225,7 @@ class WBA(nn.Module):
 
         self.band_attention = nn.Sequential(
             nn.AdaptiveAvgPool2d(1),
-            nn.Conv2d(wave_dim * 4, wave_dim * 4, kernel_size=1, groups=dim), 
+            nn.Conv2d(wave_dim * 4, wave_dim * 4, kernel_size=1, groups=4), 
             nn.Sigmoid()
         )
 
