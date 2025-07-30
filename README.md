@@ -1,5 +1,5 @@
 <div align="center">
-<h1>DFA-Net: Dual Frequency-Aware Vision Mamba U-Net for Medical Image Segmentation</h1>
+<h1>DFA-Net</h1>
 </div>
 
 ## Installation
