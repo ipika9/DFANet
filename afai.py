@@ -14,8 +14,6 @@ class FrequencyDecomposer(nn.Module):
         )
 
         self.freq_scale = nn.Parameter(torch.tensor([1.0, 1.0])) 
-
-        # 添加数据集自适应层，用于动态调整频率增强
         self.adaptive_scale = nn.Sequential(
             nn.AdaptiveAvgPool2d(1),
             nn.Conv2d(dim, 2, kernel_size=1),
@@ -49,7 +47,7 @@ class FrequencyInteractionModule(nn.Module):
 
         self.channel_att = nn.Sequential(
             nn.AdaptiveAvgPool2d(1),
-            nn.Conv2d(dim, max(dim // 4, 8), kernel_size=1),  # 轻量级瓶颈层
+            nn.Conv2d(dim, max(dim // 4, 8), kernel_size=1), 
             nn.ReLU(inplace=True),
             nn.Conv2d(max(dim // 4, 8), dim, kernel_size=1),
             nn.Sigmoid()
