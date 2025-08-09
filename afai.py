@@ -148,7 +148,7 @@ class CrossScaleAttention(nn.Module):
         return enhanced_features
 
 
-class AFIB(nn.Module):
+class AFAI(nn.Module):
 
     def __init__(self, c_list: List[int]):
         super().__init__()
