@@ -91,6 +91,6 @@ def save_x_y_hat(x: np.ndarray, y: np.ndarray, y_hat: np.ndarray, colormap: dict
         # contours, _ = cv2.findContours(np.array(y == class_id).astype(np.uint8), cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
         # darker_color_rgb = make_rgb_darker(color_rgb, percentage=0.5)
         # darker_color_bgr_for_contour = (darker_color_rgb[2], darker_color_rgb[1], darker_color_rgb[0]) # RGB to BGR
-        # cv2.drawContours(x_bgr_canvas, contours, -1, darker_color_bgr_for_contour, thickness=2) # 这里的thickness可以调整
+        # cv2.drawContours(x_bgr_canvas, contours, -1, darker_color_bgr_for_contour, thickness=2) 
 
     cv2.imwrite(out, x_bgr_canvas)
