@@ -6,7 +6,7 @@ from typing import Any
 from model.encoder import Encoder
 from model.decoder import Decoder
 import torch.nn.functional as F
-from afai import AFAI
+from CFIM import CFIM
 class CFAINET(nn.Module):
     def __init__(
             self,
@@ -54,4 +54,4 @@ class CFAINET(nn.Module):
         self.encoder.unfreeze_params()
 
 def build_model(**kwargs: Any) -> DFANet:
-    return DFANet(**kwargs)
+    return CFAINET(**kwargs)
