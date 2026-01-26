@@ -7,7 +7,7 @@ from model.encoder import Encoder
 from model.decoder import Decoder
 import torch.nn.functional as F
 from afai import AFAI
-class DFANet(nn.Module):
+class CFAINET(nn.Module):
     def __init__(
             self,
             in_channels: int = 3,
