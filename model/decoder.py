@@ -279,7 +279,7 @@ class WBA(nn.Module):
         return out + identity
 
 
-class FWVSS(nn.Sequential):
+class WFRB(nn.Sequential):
     def __init__(
             self,
             dim: int,
@@ -325,7 +325,7 @@ class FWVSS(nn.Sequential):
                 use_checkpoint=use_checkpoint,
                 customized_mlp=MSAC
             ))
-        super(FWVSS, self).__init__(OrderedDict(
+        super((WFRB, self).__init__(OrderedDict(
             blocks=nn.Sequential(*blocks),
         ))
 
@@ -419,7 +419,7 @@ class UpBlock(nn.Module):
         super(UpBlock, self).__init__()
         self.up = FAPE(in_channels)
         self.concat_layer = Linear2d(2 * out_channels, out_channels)
-        self.vss_layer = FWVSS(dim=out_channels, depth=depth, drop_path=drop_path)
+        self.vss_layer = (WFRB(dim=out_channels, depth=depth, drop_path=drop_path)
         self.use_wavelet = use_wavelet
         if use_wavelet:
             self.wavelet_recon = WBA(out_channels)
