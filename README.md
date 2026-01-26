@@ -1,5 +1,5 @@
 <div align="center">
-<h1>DFA-Net</h1>
+<h1>CFAI-NETt</h1>
 </div>
 
 ## Installation
